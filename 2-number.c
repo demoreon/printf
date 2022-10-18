@@ -3,7 +3,7 @@
 /**
  * print_from_to - prints a range of char addresses
  * @start: starting address
- * @stop: stopping address
+ * @stop: stop address
  * @except: except address
  *
  * Return: number bytes printed
