@@ -1,26 +1,24 @@
 #include "main.h"
 
 /**
- * init_params - Clears struct fields and reset buf
- * @params: the parameters struct
- * @ap: the argument pointer
+ * init_params - Initializes parameters struct and resets buffer
+ * @p: Pointer to the parameters struct
+ * @arg_list: The argument pointer
+ *
  * Return: void
  */
 
-void init_params(params_t *params, va_list ap)
+void init_p(parameters_t *p, va_list arg_list)
 {
-	params->unsign = 0;
-
-	params->plus_flag = 0;
-	params->space_flag = 0;
-	params->hashtag_flag = 0;
-	params->zero_flag = 0;
-	params->minus_flag = 0;
-
-	params->width = 0;
-	params->precision = UINT_MAX;
-
-	params->h_modifier = 0;
-	params->l_modifier = 0;
-	(void)ap;
+    p->unsign = 0;
+    p->plus_f = 0;
+    p->space_f = 0;
+    p->hashtag_f = 0;
+    p->zero_f = 0;
+    p->minus_f = 0;
+    p->width = 0;
+    p->prec = UINT_MAX;
+    p->h_mod = 0;
+    p->l_mod = 0;
+    (void)arg_list;
 }

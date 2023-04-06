@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * get_precision - gets the precision from the format string
+ * get_precision - gets the prec from the format string
  * @s: the format string
- * @params: the parameters struct
- * @ap: the argument pointer
+ * @p: the parameters struct
+ * @arg_list: the argument pointer
  * Return: new pointer
 */
 
-char *get_precision(char *s, params_t *params, va_list ap)
+char *get_precision(char *s, parameters_t *p, va_list arg_list)
 {
 	int d = 0;
 
@@ -17,7 +17,7 @@ char *get_precision(char *s, params_t *params, va_list ap)
 	s++;
 	if (*s == '*')
 	{
-		d = va_arg(ap, int);
+		d = va_arg(arg_list, int);
 		s++;
 	}
 	else
@@ -25,6 +25,6 @@ char *get_precision(char *s, params_t *params, va_list ap)
 		while (_isdigit(*s))
 			d = d * 10 + (*s++ - '0');
 	}
-	params->precision = d;
+	p->prec = d;
 	return (s);
 }
