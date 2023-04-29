@@ -22,10 +22,11 @@ int _printf(const char *format, ...)
 	va_list args;
 	const char *c;
 	int len;
+	char *s; /* used by %s */
 
 	va_start(args, format);
 	c = format;
-	len = 0;
+	len = 0; /* length of the printf characters */
 
 	if (c  == NULL)
 		return (-1);
@@ -39,6 +40,12 @@ int _printf(const char *format, ...)
 				PRINT(va_arg(args, int));
 				break;
 			case 's':
+				s =  va_arg(args, char *);
+				while (*s != '\0')
+				{
+					PRINT(*s);
+					s++;
+				}
 				break;
 			case '%':
 				PRINT(*c);
