@@ -70,14 +70,14 @@ int _printf(const char *format, ...)
 			default:
 				PRINT(*(c - 1));
 				PRINT(*c);
-				len++;
 				break;
 			}
 		}
 		else
-		{
+			if (*c == '%' && *(c + 1) == '\0')
+				return (-1);
+		else
 			PRINT(*c);
-		}
 		len++;
 		c++;
 	}
