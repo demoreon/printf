@@ -23,6 +23,8 @@ int print_str(char *c, int len)
 	char *s; /* used by %s */
 
 	s = c;
+	if (c == NULL)
+		s = "(null)";
 	while (*s != '\0')
 	{
 		PRINT(*s);
