@@ -47,9 +47,6 @@ int _printf(const char *format, ...)
 					s++;
 				}
 				break;
-			case '%':
-				PRINT(*c);
-				break;
 			default:
 				PRINT(*c);
 				break;
