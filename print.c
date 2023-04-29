@@ -38,6 +38,7 @@ int _printf(const char *format, ...)
 			{
 			case 'c':
 				PRINT(va_arg(args, int));
+				len++;
 				break;
 			case 's':
 				s =  va_arg(args, char *);
@@ -45,17 +46,27 @@ int _printf(const char *format, ...)
 				{
 					PRINT(*s);
 					s++;
+					len++;
 				}
 				break;
-			default:
+			case '%':
 				PRINT(*c);
+				break;
+			default:
+				PRINT(*(c - 1));
+				len++;
+				PRINT(*c);
+				len++;
 				break;
 			}
 		}
 		else
-			_putchar(*c);
+		{
+			PRINT(*c);
+			len++;
+		}
 		c++;
-		len++;
 	}
+
 	return (len);
 }
