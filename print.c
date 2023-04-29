@@ -60,7 +60,7 @@ int _printf(const char *format, ...)
 				PRINT(va_arg(args, int));
 				break;
 			case 's':
-				len += print_str(va_arg(args, char *), len - 1);
+				len = print_str(va_arg(args, char *), len - 1);
 				break;
 			case '%':
 				PRINT(*c);
