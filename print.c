@@ -12,6 +12,27 @@ void _putchar(char c)
 }
 
 /**
+ * print_str - prints an array of character literal
+ * @c: The argument to print
+ * @len: The current len of characters
+ * Return: len
+ */
+
+int print_str(char *c, int len)
+{
+	char *s; /* used by %s */
+
+	s = c;
+	while (*s != '\0')
+	{
+		PRINT(*s);
+		s++;
+		len++;
+	}
+	return (len);
+}
+
+/**
  * _printf - a variadic function that can print an unknown number of args
  * @format: The argument to parse
  * Return: It returns the number of characters printed
@@ -22,7 +43,6 @@ int _printf(const char *format, ...)
 	va_list args;
 	const char *c;
 	int len;
-	char *s; /* used by %s */
 
 	va_start(args, format);
 	c = format;
@@ -38,23 +58,15 @@ int _printf(const char *format, ...)
 			{
 			case 'c':
 				PRINT(va_arg(args, int));
-				len++;
 				break;
 			case 's':
-				s =  va_arg(args, char *);
-				while (*s != '\0')
-				{
-					PRINT(*s);
-					s++;
-					len++;
-				}
+				len += print_str(va_arg(args, char *), len - 1);
 				break;
 			case '%':
 				PRINT(*c);
 				break;
 			default:
 				PRINT(*(c - 1));
-				len++;
 				PRINT(*c);
 				len++;
 				break;
@@ -63,10 +75,9 @@ int _printf(const char *format, ...)
 		else
 		{
 			PRINT(*c);
-			len++;
 		}
+		len++;
 		c++;
 	}
-
 	return (len);
 }
