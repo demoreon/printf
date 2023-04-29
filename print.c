@@ -54,6 +54,8 @@ int _printf(const char *format, ...)
 		return (-1);
 	while (*c != '\0')
 	{
+		if (*c == '%' && *(c + 1) == '\0')
+			return (-1);
 		if (*c == '%' && *(c + 1) != '\0')
 		{
 			switch (*(++c))
@@ -74,8 +76,6 @@ int _printf(const char *format, ...)
 				break;
 			}
 		}
-		else if (*c == '%' && *(c + 1) == '\0')
-			return (-1);
 		else
 			PRINT(*c);
 		len++;
