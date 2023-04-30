@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <limits.h>
 #define PRINT(a) _putchar(a)
 
 void _putchar(char c);
