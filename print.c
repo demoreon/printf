@@ -6,7 +6,7 @@ int print_int(int num, int len)
 
 	if (num == 0)
 	{
-		PRINT(0);
+		PRINT('0');
 		len++;
 		return (len);
 	}
