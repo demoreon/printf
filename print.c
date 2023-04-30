@@ -14,10 +14,12 @@ int print_int(int num, int len)
 	{
 		PRINT('-');
 		PRINT('2');
+		len += 2;
 		num = 147483648;
 	} else if (num < 0)
 	{
 		PRINT('-');
+		len++;
 		num = -num;
 	}
 	while (num / div >= 10) /* scale div to the dividend value */
