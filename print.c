@@ -1,37 +1,40 @@
 #include "main.h"
 
-int print_int(int num, int len)
-{
-	int div = 1;
+/**
+ * get_specifier - validates the char if exist.
+ * @chr: char to validate.
+ * @args: list of variable auguments.
+ * @len: char printed
+ * Return: len of the printed char.
+ */
 
-	if (num == 0)
+int get_specifier(const char *chr, va_list *args, int len)
+{
+	int i = 0;
+	int len_updated;
+	find_spec func[] = {
+		{"c", print_char}, {"s", print_str},
+		{"d", print_int}, {"i", print_int},
+		{"%", print_percent}, {NULL, NULL}
+	};
+
+	while (func[i].c != NULL)
 	{
-		PRINT('0');
-		len++;
-		return (len);
+		if (strncmp(func[i].c, chr, 1) == 0)
+		{
+			len_updated = func[i].func(args, len);
+			break;
+		}
+		i++;
 	}
-	if (num == INT_MIN)
+
+	if (func[i].c == NULL)
 	{
-		PRINT('-');
-		PRINT('2');
-		len += 2;
-		num = 147483648;
-	} else if (num < 0)
-	{
-		PRINT('-');
-		len++;
-		num = -num;
+		PRINT(*(chr - 1));
+		PRINT(*chr);
+		len_updated = len + 2;
 	}
-	while (num / div >= 10) /* scale div to the dividend value */
-		div *= 10;
-	while (div > 0)
-	{
-		PRINT(num / div + 48);
-		num %= div;
-		div /= 10;
-		len++;
-	}
-	return (len);
+	return (len_updated);
 }
 
 /**
@@ -58,27 +61,7 @@ int _printf(const char *format, ...)
 			return (-1);
 		if (*c == '%' && *(c + 1) != '\0')
 		{
-			switch (*(++c))
-			{
-			case 'c':
-				PRINT(va_arg(args, int));
-				break;
-			case 's':
-				len = print_str(va_arg(args, char *), len - 1);
-				break;
-			case '%':
-				PRINT(*c);
-				break;
-			case 'd':
-			case 'i':
-				len = print_int(va_arg(args, int), len - 1);
-				break;
-			default:
-				PRINT(*(c - 1));
-				PRINT(*c);
-				len++;
-				break;
-			}
+			len = get_specifier(++c, &args, len - 1);
 		}
 		else
 			PRINT(*c);
