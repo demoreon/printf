@@ -13,6 +13,13 @@ int p_binary(va_list *args, int len)
 	unsigned mask = 1 << (sizeof(int) * 8 - 1);
 	int chk = 0;
 
+	if (num == 0)
+	{
+		PRINT('0');
+		len += 1;
+		return (len);
+	}
+
 	while (mask)
 	{	if (num & mask)
 		{
