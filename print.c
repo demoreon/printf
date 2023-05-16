@@ -13,9 +13,9 @@ int get_specifier(const char *chr, va_list *args, int len)
 	int i = 0;
 	int len_updated;
 	find_spec func[] = {
-		{"c", print_char}, {"s", print_str},
-		{"d", print_int}, {"i", print_int},
-		{"%", print_percent}, {NULL, NULL}
+		{"c", p_char}, {"s", p_str}, {"d", p_int}, {"i", p_int},
+		{"%", p_percent}, {"b", p_binary},
+		{NULL, NULL}
 	};
 
 	while (func[i].c != NULL)

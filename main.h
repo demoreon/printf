@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define PRINT(a) _putchar(a)
 
@@ -24,9 +25,10 @@ typedef struct func_int
 
 void _putchar(char c);
 int _printf(const char *, ...);
-int print_char(va_list *, int);
-int print_str(va_list *, int);
-int print_int(va_list *, int);
-int print_percent(va_list *, int);
+int p_char(va_list *, int);
+int p_str(va_list *, int);
+int p_int(va_list *, int);
+int p_percent(va_list *, int);
+int p_binary(va_list *, int);
 int get_specifier(const char *, va_list *, int);
 #endif /* MAIN_H */
