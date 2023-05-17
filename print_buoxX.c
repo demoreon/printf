@@ -14,6 +14,11 @@ int p_octal(va_list *args, int len)
 	int i = 0;
 	int a[12];
 
+	if (num == 0)
+	{
+		PRINT(48);
+		return (len++);
+	}
 	while (num)
 	{
 		oct = (num & 7);
