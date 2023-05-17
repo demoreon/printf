@@ -30,5 +30,7 @@ int p_str(va_list *, int);
 int p_int(va_list *, int);
 int p_percent(va_list *, int);
 int p_binary(va_list *, int);
+int p_usigned_int(va_list *, int);
+int p_octal(va_list *args, int len);
 int get_specifier(const char *, va_list *, int);
 #endif /* MAIN_H */
