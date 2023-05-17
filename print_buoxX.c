@@ -51,7 +51,7 @@ int p_usigned_int(va_list *args, int len)
 	if (num == 0)
 	{
 		PRINT('0');
-		len++;
+		return (len++);
 	}
 	while (num / div >= 10)
 		div *= 10;
