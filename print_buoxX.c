@@ -17,7 +17,7 @@ int p_octal(va_list *args, int len)
 	if (num == 0)
 	{
 		PRINT(48);
-		return (len++);
+		return (++len);
 	}
 	while (num)
 	{
