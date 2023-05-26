@@ -31,7 +31,7 @@ int p_hex(va_list *args, int len)
 	num = va_arg(*args, unsigned int);
 	if (num == 0)
 	{
-		PRINT(num);
+		PRINT(num + 48);
 		return (++len);
 	}
 	len = p_hex_helper(num, len);
