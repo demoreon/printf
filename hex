@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <limits.h>
+
+void print_hex(unsigned int num) {
+    char hex_digits[] = "0123456789abcdef";
+    char hex_result[9]; // Assuming 32-bit unsigned int
+
+    int i = 0;
+    while (num > 0) {
+        hex_result[i] = hex_digits[num % 16];
+        num /= 16;
+        i++;
+    }
+
+    for (int j = i - 1; j >= 0; j--) {
+        putchar(hex_result[j]);
+    }
+    putchar('\n');
+}
+
+int main() {
+    unsigned int ui = (unsigned int)INT_MAX + 1024;
+    print_hex(ui);
+    return 0;
+}

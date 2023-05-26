@@ -1,6 +1,45 @@
 #include "main.h"
 
 /**
+ * p_hex_helper - This prints values in hex.
+ * @num: list of variable auguments.
+ * @len: char printed
+ * Return: len of the printed char.
+ */
+
+int p_hex_helper(unsigned int num, int len)
+{
+	char a[] = "0123456789abcdef";
+
+	if (num >= 16)
+		len = p_hex_helper(num / 16, len);
+	PRINT(a[num % 16]);
+	return (++len);
+}
+
+/**
+ * p_hex - This prints values in hex.
+ * @args: list of variable auguments.
+ * @len: char printed
+ * Return: len of the printed char.
+ */
+
+int p_hex(va_list *args, int len)
+{
+	unsigned int num;
+
+	num = va_arg(*args, unsigned int);
+	if (num == 0)
+	{
+		PRINT(num);
+		return (++len);
+	}
+	len = p_hex_helper(num, len);
+	return (len);
+}
+
+
+/**
  * p_octal - This prints values in octal.
  * @args: list of variable auguments.
  * @len: char printed
