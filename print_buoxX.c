@@ -123,11 +123,19 @@ int p_binary(va_list *args, int len)
 	int num = va_arg(*args, int);
 	int mask = 1 << (sizeof(int) * 8 - 1);
 	int chk = 0;
+	char *i;
 
 	if (num == 0)
 	{
 		PRINT('0');
 		len += 1;
+		return (len);
+	}
+	if (num == INT_MAX)
+	{
+		i = "1111111111111111111111111111111";
+		len += 31;
+		write(STDOUT_FILENO, i, 32);
 		return (len);
 	}
 
