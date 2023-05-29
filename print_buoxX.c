@@ -39,6 +39,7 @@ int p_hex(va_list *args, int len)
 	if (num == 0)
 	{
 		PRINT(num + 48);
+		printf("%d\n", len);
 		len -= 2000;
 		return (++len);
 	}
