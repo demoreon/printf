@@ -39,8 +39,7 @@ int p_hex(va_list *args, int len)
 	if (num == 0)
 	{
 		PRINT(num + 48);
-		len -= 2000;
-		return (++len);
+		return (len >= 1999 ? ++len - 2000 : ++len);
 	}
 	len = p_hex_helper(num, len);
 	return (len >= 1999 ? len - 2000 : len);
