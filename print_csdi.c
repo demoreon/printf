@@ -92,15 +92,16 @@ int p_percent(va_list *args, int len)
 int p_str(va_list *args, int len)
 {
 	char *s;
+	int i = 0;
 
 	s = va_arg(*args, char *); /* add va_arg here */
 	if (s == NULL)
 		s = "(null)";
-	while (*s != '\0')
+	while (s[i] != '\0' && i <= 1024)
 	{
-		PRINT(*s);
-		s++;
+		i++;
 		len++;
 	}
+	write(STDOUT_FILENO, s, i);
 	return (len);
 }
