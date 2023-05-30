@@ -121,7 +121,7 @@ int p_usigned_int(va_list *args, int len)
 int p_binary(va_list *args, int len)
 {
 	int num = va_arg(*args, int);
-	int mask = 1 << (sizeof(int) * 8 - 1);
+	unsigned int mask = 1 << (sizeof(int) * 8 - 1);
 	int chk = 0;
 
 	if (num == 0)
