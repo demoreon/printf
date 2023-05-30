@@ -121,10 +121,9 @@ int p_usigned_int(va_list *args, int len)
 int p_binary(va_list *args, int len)
 {
 	int num = va_arg(*args, int);
-	int mask = 1 << (sizeof(int) * 8 - 1);
-	int chk = 0;
+	/* int mask = 1 << (sizeof(int) * 8 - 1); */
+	/* int chk = 0; */
 	char *i;
-
 	if (num == 0)
 	{
 		PRINT('0');
@@ -139,20 +138,20 @@ int p_binary(va_list *args, int len)
 		return (len);
 	}
 
-	while (mask)
-	{
-		if (num & mask)
-		{
-			PRINT('1');
-			chk = 1;
-			len += 1;
-		}
-		else if (chk)
-		{
-			PRINT('0');
-			len += 1;
-		}
-		mask = mask >> 1;
-	}
+	/* while (mask) */
+	/* { */
+	/* 	if (num & mask) */
+	/* 	{ */
+	/* 		PRINT('1'); */
+	/* 		chk = 1; */
+	/* 		len += 1; */
+	/* 	} */
+	/* 	else if (chk) */
+	/* 	{ */
+	/* 		PRINT('0'); */
+	/* 		len += 1; */
+	/* 	} */
+	/* 	mask = mask >> 1; */
+	/* } */
 	return (len);
 }
