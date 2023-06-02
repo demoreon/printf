@@ -59,6 +59,8 @@ int p_octal(va_list *args, int len)
 	unsigned int oct;
 	int i = 0;
 	int a[12];
+	char buf[BUF_MAX];
+	int c = 0; /* buffer index tracker */
 
 	if (num == 0)
 	{
@@ -75,10 +77,17 @@ int p_octal(va_list *args, int len)
 	i--;
 	while (i >= 0)
 	{
-		PRINT(a[i] + 48);
+		if (c == BUF_MAX)
+			c = buffer_pro(buf, c);
+		buf[c] = a[i] + 48;
+		c++;
 		len++;
 		i--;
 	}
+	buf[c] = '\0';
+
+	if (c) /* Check buffer not empty */
+		buffer_pro(buf, c);
 	return (len);
 }
 
@@ -93,6 +102,8 @@ int p_usigned_int(va_list *args, int len)
 {
 	unsigned int num = va_arg(*args, unsigned int);
 	unsigned int div = 1;
+	char buf[BUF_MAX];
+	int c = 0; /* buffer index tracker */
 
 	if (num == 0)
 	{
@@ -103,11 +114,18 @@ int p_usigned_int(va_list *args, int len)
 		div *= 10;
 	while (div > 0)
 	{
-		PRINT(num / div + 48);
+		if (c == BUF_MAX)
+			c = buffer_pro(buf, c);
+		buf[c] = num / div + 48;
+		c++;
 		len++;
 		num %= div;
 		div /= 10;
 	}
+	buf[c] = '\0';
+
+	if (c) /* Check buffer not empty */
+		buffer_pro(buf, c);
 	return (len);
 }
 

@@ -1,7 +1,14 @@
 char buf[BUF_MAX];
-	int c = 0; /* buffer index tracker */
-	buf[c] = '\0';
-		if (c) /* Check buffer not empty */
-		buffer_pro(buf, c);
-				if (i == BUF_MAX)
-			i = buffer_pro(buf, i);
+int c = 0; /* buffer index tracker */
+
+
+buf[c] = ;
+c++;
+
+if (c == BUF_MAX)
+	c = buffer_pro(buf, c);
+
+buf[c] = '\0';
+
+if (c) /* Check buffer not empty */
+	buffer_pro(buf, c);
