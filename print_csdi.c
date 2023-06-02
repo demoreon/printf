@@ -97,11 +97,12 @@ int p_str(va_list *args, int len)
 	s = va_arg(*args, char *); /* add va_arg here */
 	if (s == NULL)
 		s = "(null)";
-	while (s[i] != '\0' && i <= 1024)
+	while (s[i] != '\0')
 	{
 		i++;
 		len++;
 	}
 	write(STDOUT_FILENO, s, i);
+
 	return (len);
 }
