@@ -28,7 +28,7 @@ int p_int(va_list *args, int len)
 		c++;
 		len += 2;
 		num = 147483648;
-		c++;
+	
 	} else if (num < 0)
 	{
 		buf[c] = '-';
