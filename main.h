@@ -9,6 +9,7 @@
 #include <stdlib.h>
 
 #define PRINT(a) _putchar(a)
+#define BUF_MAX 1024
 
 /**
  * struct func_int - Handles integers
@@ -23,6 +24,7 @@ typedef struct func_int
 	int (*func)(va_list *, int);
 } find_spec;
 
+int buffer_pro(char *buf, int len);
 void _putchar(char c);
 int _printf(const char *, ...);
 int p_char(va_list *, int);

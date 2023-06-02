@@ -123,6 +123,8 @@ int p_binary(va_list *args, int len)
 	int num = va_arg(*args, int);
 	unsigned int mask = 1 << (sizeof(int) * 8 - 1);
 	int chk = 0;
+	char buf[BUF_MAX];
+	int i = 0; /* buffer index tracker */
 
 	if (num == 0)
 	{
@@ -133,18 +135,25 @@ int p_binary(va_list *args, int len)
 
 	while (mask)
 	{
+		if (i == BUF_MAX)
+			i = buffer_pro(buf, i);
 		if (num & mask)
 		{
-			PRINT('1');
+			buf[i] = '1';
+			i++;
 			chk = 1;
 			len += 1;
 		}
 		else if (chk)
 		{
-			PRINT('0');
+			buf[i] = '0';
+			i++;
 			len += 1;
 		}
 		mask = mask >> 1;
 	}
+	buf[i] = '\0';
+	if (i) /* Check buffer not empty */
+		buffer_pro(buf, i);
 	return (len);
 }
