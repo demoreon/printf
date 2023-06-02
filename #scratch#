@@ -3,3 +3,5 @@ char buf[BUF_MAX];
 	buf[c] = '\0';
 		if (c) /* Check buffer not empty */
 		buffer_pro(buf, c);
+				if (i == BUF_MAX)
+			i = buffer_pro(buf, i);
