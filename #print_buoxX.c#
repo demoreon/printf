@@ -125,7 +125,7 @@ int p_binary(va_list *args, int len)
 	int chk = 0;
 	char buf[BUF_MAX];
 	int i = 0; /* buffer index tracker */
-	
+
 	if (num == 0)
 	{
 		PRINT('0');
