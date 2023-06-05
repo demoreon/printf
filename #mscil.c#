@@ -1,0 +1,39 @@
+#include "main.h"
+
+/**
+ * buffer_pro - Handles buffer printingout
+ * @buf: list of variable auguments.
+ * @len: char printed
+ * Return: len of the printed char.
+ */
+
+int buffer_pro(char *buf, int len)
+{
+	int i = 0;
+
+	while (buf[i] != '\0' && i < len)
+	{
+		PRINT(buf[i]);
+		i++;
+	}
+	return (0);
+}
+
+		if (len >= 1999)
+		{
+			if (*s < 32 || *s >= 127)
+			{
+				PRINT('\\');
+				PRINT('x');
+				len += 2;
+				/* len = p_hex(wrapper, len); */
+				s++;
+			}
+			else
+			{
+				PRINT(*s);
+				s++;
+				len++;
+			}
+		}
+		else

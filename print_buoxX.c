@@ -12,7 +12,7 @@ int p_hex_helper(unsigned int num, int len)
 	char a[] = "0123456789abcdef";
 	char A[] = "0123456789ABCDEF";
 	char *chr;
-
+	
 	if (len >= 1999)
 		chr = A;
 	else
@@ -33,14 +33,16 @@ int p_hex_helper(unsigned int num, int len)
 
 int p_hex(va_list *args, int len)
 {
-	unsigned int num;
+	int num;
 
-	num = va_arg(*args, unsigned int);
+	printf("%d\n", *args);
+	num = va_arg(*args, int);
 	if (num == 0)
 	{
 		PRINT(num + 48);
 		return (len >= 1999 ? ++len - 2000 : ++len);
 	}
+
 	len = p_hex_helper(num, len);
 	return (len >= 1999 ? len - 2000 : len);
 }
