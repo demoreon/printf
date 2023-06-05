@@ -31,6 +31,7 @@ int p_int(va_list *args, int len)
 	} else if (num < 0)
 	{
 		buf[c] = '-';
+		len++, c++;
 		num = -num;
 	}
 	while (num / div >= 10) /* scale div to the dividend value */
