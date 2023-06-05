@@ -25,16 +25,13 @@ int p_int(va_list *args, int len)
 		buf[c] = '-';
 		c++;
 		buf[c] = '2';
-		c++;
-		len += 2;
+		c++, len += 2;
 		num = 147483648;
 
 	} else if (num < 0)
 	{
 		buf[c] = '-';
-		len++;
 		num = -num;
-		c++;
 	}
 	while (num / div >= 10) /* scale div to the dividend value */
 		div *= 10;
@@ -45,13 +42,11 @@ int p_int(va_list *args, int len)
 		buf[c] = num / div + 48;
 		num %= div;
 		div /= 10;
-		len++;
-		c++;
+		len++, c++;
 	}
 	buf[c] = '\0';
 	if (c) /* Check buffer not empty */
 		buffer_pro(buf, c);
-
 	return (len);
 }
 
