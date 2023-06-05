@@ -15,7 +15,7 @@ int get_specifier(const char *chr, va_list *args, int len)
 	find_spec func[] = {
 		{"c", p_char}, {"s", p_str}, {"d", p_int}, {"i", p_int},
 		{"%", p_percent}, {"b", p_binary}, {"u", p_usigned_int},
-		{"o", p_octal}, {"x", p_hex}, {"X", p_hex},
+		{"o", p_octal}, {"x", p_hex}, {"X", p_hex}, {"S", p_str},
 		{NULL, NULL}
 	};
 
@@ -23,7 +23,7 @@ int get_specifier(const char *chr, va_list *args, int len)
 	{
 		if (strncmp(func[i].c, chr, 1) == 0)
 		{
-			if (*chr == 'X')
+			if (*chr == 'X' || *chr == 'S')
 				len += 2000;
 			len_updated = func[i].func(args, len);
 			break;

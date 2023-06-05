@@ -111,10 +111,24 @@ int p_str(va_list *args, int len)
 	{
 		if (c == BUF_MAX)
 			c = buffer_pro(buf, c);
-		buf[c] = *s;
-		c++;
-		s++;
-		len++;
+		if (len >= 1999)
+			{
+				if (*s < 32 || *s >= 127)
+				{
+					buf[c] = '\\';
+					len++, c++;
+					buf[c] = 'x';
+					len++, c++;
+					len = p_hex((va_list *) &s, len);
+				}
+			}
+		else
+		{
+			buf[c] = *s;
+			c++;
+			s++;
+			len++;
+		}
 	}
 	buf[c] = '\0';
 
