@@ -105,17 +105,25 @@ int p_percent(va_list *args, int len)
 int p_str(va_list *args, int len)
 {
 	char *s;
-	int i = 0;
+	char buf[BUF_MAX];
+	int c = 0; /* buffer index tracker */
 
-	s = va_arg(*args, char *); /* add va_arg here */
+	s = va_arg(*args, char *);
 	if (s == NULL)
 		s = "(null)";
-	while (s[i] != '\0')
+	while (*s != '\0')
 	{
-		i++;
+		if (c == BUF_MAX)
+			c = buffer_pro(buf, c);
+		buf[c] = *s;
+		c++;
+		s++;
 		len++;
 	}
-	write(STDOUT_FILENO, s, i);
+	buf[c] = '\0';
+
+	if (c) /* Check buffer not empty */
+		buffer_pro(buf, c);
 
 	return (len);
 }

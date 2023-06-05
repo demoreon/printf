@@ -2,11 +2,10 @@ char buf[BUF_MAX];
 int c = 0; /* buffer index tracker */
 
 
-buf[c] = ;
-c++;
-
 if (c == BUF_MAX)
 	c = buffer_pro(buf, c);
+buf[c] = ;
+c++;
 
 buf[c] = '\0';
 
