@@ -12,7 +12,7 @@ int p_hex_helper(unsigned int num, int len)
 	char a[] = "0123456789abcdef";
 	char A[] = "0123456789ABCDEF";
 	char *chr;
-	
+
 	if (len >= 1999)
 		chr = A;
 	else
