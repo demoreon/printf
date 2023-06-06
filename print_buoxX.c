@@ -35,7 +35,6 @@ int p_hex(va_list *args, int len)
 {
 	int num;
 
-	printf("%d\n", *args);
 	num = va_arg(*args, int);
 	if (num == 0)
 	{
