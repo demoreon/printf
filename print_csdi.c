@@ -117,23 +117,22 @@ int p_str(va_list *args, int len)
 			{
 				PRINT('\\');
 				PRINT('x');
-				len += 2;
+				if (*s < 16)
+					PRINT('0'), len++;
+				len += 2, s++;
 				len = p_hex_helper(*s, len);
-				s++;
 			}
 			else
 			{
 				PRINT(*s);
-				s++;
-				len++;
+				s++, len++;
 			}
 		}
 		else
 		{
 			buf[c] = *s;
 			c++;
-			s++;
-			len++;
+			s++, len++;
 		}
 	}
 	buf[c] = '\0';
