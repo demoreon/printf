@@ -109,8 +109,6 @@ int p_str(va_list *args, int len)
 		s = "(null)";
 	while (*s != '\0')
 	{
-		if (c == BUF_MAX)
-			c = buffer_pro(buf, c);
 		if (len >= 1999)
 		{
 			if (*s < 32 || *s >= 127)
@@ -119,8 +117,8 @@ int p_str(va_list *args, int len)
 				PRINT('x');
 				if (*s < 16)
 					PRINT('0'), len++;
-				len += 2, s++;
 				len = p_hex_helper(*s, len);
+				len += 2, s++;
 			}
 			else
 			{
@@ -130,6 +128,8 @@ int p_str(va_list *args, int len)
 		}
 		else
 		{
+			if (c == BUF_MAX)
+				c = buffer_pro(buf, c);
 			buf[c] = *s;
 			c++;
 			s++, len++;
