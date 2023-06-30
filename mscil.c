@@ -31,12 +31,6 @@ int p_addr(va_list *args, int len)
 	int i, digit, chk = 0;
 	void *s = va_arg(*args, void *);
 
-	if (s == NULL)
-	{
-		write(STDOUT_FILENO, "(nil)", 5);
-		return (len += 5);
-	}
-
 	addr = (u_int64_t)s;
 	putchar(48);
 	putchar('x');
