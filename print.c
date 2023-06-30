@@ -16,6 +16,7 @@ int get_specifier(const char *chr, va_list *args, int len)
 		{"c", p_char}, {"s", p_str}, {"d", p_int}, {"i", p_int},
 		{"%", p_percent}, {"b", p_binary}, {"u", p_usigned_int},
 		{"o", p_octal}, {"x", p_hex}, {"X", p_hex}, {"S", p_str},
+		{"p", p_addr},
 		{NULL, NULL}
 	};
 
