@@ -9,31 +9,26 @@
 
 int p_int(va_list *args, int len)
 {
-	int num = va_arg(*args, int);
+	long num = va_arg(*args, int);
 	int div = 1;
 	char buf[BUF_MAX];
 	int c = 0; /* buffer index tracker */
 
 	if (num == 0)
 	{
+		if (len >= 1999)
+			PRINT('+');
 		PRINT('0');
-		len++;
-		return (len);
+		return (len >= 1999 ? ++len - 1999 : len);
 	}
-	if (num == INT_MIN)
-	{
-		buf[c] = '-';
-		c++;
-		buf[c] = '2';
-		c++, len += 2;
-		num = 147483648;
-
-	} else if (num < 0)
+	if (num < 0)
 	{
 		buf[c] = '-';
 		len++, c++;
 		num = -num;
 	}
+	if (len >= 1999)
+		PRINT('+');
 	while (num / div >= 10) /* scale div to the dividend value */
 		div *= 10;
 	while (div > 0)
@@ -48,7 +43,7 @@ int p_int(va_list *args, int len)
 	buf[c] = '\0';
 	if (c) /* Check buffer not empty */
 		buffer_pro(buf, c);
-	return (len);
+	return (len >= 1999 ? len - 1999 : len);
 }
 
 /**
