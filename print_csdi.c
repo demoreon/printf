@@ -19,7 +19,8 @@ int p_int(va_list *args, int len)
 		if (len >= 1999)
 			PRINT('+');
 		PRINT('0');
-		return (len >= 1999 ? ++len - 1999 : len);
+		len++;
+		return (len >= 1999 ? len - 1999 : len);
 	}
 	if (num < 0)
 	{
