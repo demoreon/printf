@@ -28,7 +28,7 @@ int p_int(va_list *args, int len)
 		len++, c++;
 		num = -num;
 	}
-	if (len >= 1999)
+	if (len >= 1999 && num > 0)
 		PRINT('+');
 	while (num / div >= 10) /* scale div to the dividend value */
 		div *= 10;
