@@ -22,7 +22,7 @@ int get_specifier(const char *chr, va_list *args, int len)
 
 	while (func[i].c != NULL)
 	{
-		if (strncmp(func[i].c, chr, 1) == 0)
+		if (strncmp(func[i].c, chr, *chr == 43 ? 2 : 1) == 0)
 		{
 			if (*chr == 'X' || *chr == 'S' || *chr == '+')
 				len += 2000;
@@ -66,6 +66,7 @@ int _printf(const char *format, ...)
 		if (*c == '%' && *(c + 1) != '\0')
 		{
 			len = get_specifier(++c, &args, len - 1);
+			c += (*c == 43 ? 1 : 0);
 		}
 		else
 			PRINT(*c);
