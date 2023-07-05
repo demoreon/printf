@@ -13,6 +13,7 @@ int p_int(va_list *args, int len)
 	int div = 1;
 	char buf[BUF_MAX];
 	int c = 0; /* buffer index tracker */
+	int flag = 1;
 
 	if (num == 0)
 	{
@@ -24,11 +25,14 @@ int p_int(va_list *args, int len)
 	}
 	if (num < 0)
 	{
+		if (len >= 1999) /* removes the extra count for negative sign */
+			len--;
+		flag = 0;
 		buf[c] = '-';
 		len++, c++;
 		num = -num;
 	}
-	if (len >= 1999 && num > 0)
+	if (len >= 1999 && flag)
 		PRINT('+');
 	while (num / div >= 10) /* scale div to the dividend value */
 		div *= 10;
