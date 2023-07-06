@@ -54,3 +54,18 @@ int p_addr(va_list *args, int len)
 	}
 	return (len);
 }
+
+/**
+ * p_percent - prints a percent sign
+ * @args: The integer to print
+ * @len: The current len of characters
+ * Return: Returns the len
+ */
+
+int p_percent(va_list *args, int len)
+{
+	(void)args; /* suppress "unused parameter" warning by casting to void */
+	PRINT('%');
+	len++;
+	return (len);
+}

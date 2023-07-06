@@ -1,6 +1,24 @@
 #include "main.h"
 
 /**
+ * p_int_helper - This handles the %d and %i output
+ * @num: The integer to print
+ * @len: The current len
+ * Return: Updated len
+ */
+
+int p_int_helper(long num, int len)
+{
+	if (num == 0)
+		return (0);
+
+	len = p_int_helper(num / 10, len);
+	PRINT(num % 10 + 48);
+
+	return (++len);
+}
+
+/**
  * p_int - This handles the %d and %i output
  * @args: The integer to print
  * @len: The current len
@@ -10,45 +28,21 @@
 int p_int(va_list *args, int len)
 {
 	long num = va_arg(*args, int);
-	int div = 1;
-	char buf[BUF_MAX];
-	int c = 0; /* buffer index tracker */
-	int flag = 1;
 
 	if (num == 0)
 	{
-		if (len >= 1999)
-			PRINT('+');
 		PRINT('0');
 		len++;
-		return (len >= 1999 ? len - 1999 : len);
+		return (len);
 	}
 	if (num < 0)
 	{
-		if (len >= 1999) /* removes the extra count for negative sign */
-			len--;
-		flag = 0;
-		buf[c] = '-';
-		len++, c++;
+		PRINT('-');
+		len++;
 		num = -num;
 	}
-	if (len >= 1999 && flag)
-		PRINT('+');
-	while (num / div >= 10) /* scale div to the dividend value */
-		div *= 10;
-	while (div > 0)
-	{
-		if (c == BUF_MAX)
-			c = buffer_pro(buf, c);
-		buf[c] = num / div + 48;
-		num %= div;
-		div /= 10;
-		len++, c++;
-	}
-	buf[c] = '\0';
-	if (c) /* Check buffer not empty */
-		buffer_pro(buf, c);
-	return (len >= 1999 ? len - 1999 : len);
+	len = p_int_helper(num, len);
+	return (len);
 }
 
 /**
@@ -72,21 +66,6 @@ int p_char(va_list *args, int len)
 {
 	/* (void)args; */
 	PRINT(va_arg(*args, int));
-	len++;
-	return (len);
-}
-
-/**
- * p_percent - prints a percent sign
- * @args: The integer to print
- * @len: The current len of characters
- * Return: Returns the len
- */
-
-int p_percent(va_list *args, int len)
-{
-	(void)args; /* suppress "unused parameter" warning by casting to void */
-	PRINT('%');
 	len++;
 	return (len);
 }
