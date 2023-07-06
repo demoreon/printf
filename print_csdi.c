@@ -10,8 +10,7 @@
 int p_int_helper(long num, int len)
 {
 	if (num == 0)
-		return (0);
-
+		return (len);
 	len = p_int_helper(num / 10, len);
 	PRINT(num % 10 + 48);
 
@@ -41,6 +40,7 @@ int p_int(va_list *args, int len)
 		len++;
 		num = -num;
 	}
+	/* printf("Test.... %d\n", len); */
 	len = p_int_helper(num, len);
 	return (len);
 }
