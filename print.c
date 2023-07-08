@@ -1,11 +1,9 @@
 #include "main.h"
 
 /**
- * get_specifier - validates the char if exist.
+ * get_flag - validates the char if exist.
  * @chr: char to validate.
- * @args: list of variable auguments.
- * @len: char printed
- * Return: len of the printed char.
+ * Return: flag code.
  */
 
 int get_flag(const char *chr)
@@ -18,10 +16,17 @@ int get_flag(const char *chr)
 		return (2);
 	return (1);
 }
+
+/**
+ * get_specifier - validates the char if exist.
+ * @chr: char to validate.
+ * @args: list of variable auguments.
+ * @len: char printed
+ * Return: len of the printed char.
+ */
 int get_specifier(const char *chr, va_list *args, int len)
 {
-	int fg, val;
-	int i = 0;
+	int fg, val, i = 0;
 	find_spec func[] = {
 		{"c", p_char}, {"s", p_str}, {"d", p_int}, {"i", p_int},
 		{"%", p_percent}, {"b", p_binary}, {"u", p_usigned_int},
@@ -39,18 +44,19 @@ int get_specifier(const char *chr, va_list *args, int len)
 			if (*chr == 'X' || *chr == 'S')
 				len += 2000;
 			if (fg > 1)
+			{
 				if (fg == 2 && *chr == 32)
 					val = 2000;
 				else
 					val = 3000;
+			}
 			len = func[i].func(args, fg > 1 ? len + val : len);
 			if (fg == 3)
 				chr += 2;
 			else if (fg == 2)
 				chr++;
 			break;
-		}
-		i++;
+		} i++;
 	}
 
 	if (func[i].c == NULL)
