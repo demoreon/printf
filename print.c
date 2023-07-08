@@ -10,9 +10,7 @@ int get_flag(const char *chr)
 {
 	if (strncmp(chr, "+ ", 2) == 0 || strncmp(chr, " +", 2) == 0)
 		return (3);
-	else if (strncmp(chr, " ", 1) == 0)
-		return (2);
-	else if (strncmp(chr, "+", 1) == 0)
+	else if (strncmp(chr, " ", 1)  == 0 || strncmp(chr, "+", 1) == 0)
 		return (2);
 	return (1);
 }
@@ -50,11 +48,8 @@ int get_specifier(const char *chr, va_list *args, int len)
 				else
 					val = 3000;
 			}
+
 			len = func[i].func(args, fg > 1 ? len + val : len);
-			if (fg == 3)
-				chr += 2;
-			else if (fg == 2)
-				chr++;
 			break;
 		} i++;
 	}
@@ -93,6 +88,10 @@ int _printf(const char *format, ...)
 		if (*c == '%' && *(c + 1) != '\0')
 		{
 			len = get_specifier(++c, &args, --len);
+			if (get_flag(c) == 3)
+				c += 2;
+			else if (get_flag(c) == 2)
+				c++;
 		}
 		else
 			PRINT(*c);
