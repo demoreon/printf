@@ -28,11 +28,24 @@ int p_int(va_list *args, int len)
 {
 	long num = va_arg(*args, int);
 
+	if (len >= 3000 && num >= 0)
+	{
+		PRINT('+');
+		len++;
+		len -= 3000;
+	}
+	else
+		if (len >= 2000 && num >= 0)
+		{
+			PRINT(' ');
+			len++;
+			len -= 2000;
+		}
+
 	if (num == 0)
 	{
 		PRINT('0');
-		len++;
-		return (len);
+		return (++len);
 	}
 	if (num < 0)
 	{
@@ -40,7 +53,6 @@ int p_int(va_list *args, int len)
 		len++;
 		num = -num;
 	}
-	/* printf("Test.... %d\n", len); */
 	len = p_int_helper(num, len);
 	return (len);
 }

@@ -37,6 +37,6 @@ int p_octal(va_list *, int len);
 int p_hex(va_list *, int len);
 int p_hex_helper(unsigned int, int);
 int p_addr(va_list *, int len);
-
+int get_flag(const char *chr);
 int get_specifier(const char *, va_list *, int);
 #endif /* MAIN_H */

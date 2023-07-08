@@ -8,25 +8,46 @@
  * Return: len of the printed char.
  */
 
+int get_flag(const char *chr)
+{
+	if (strncmp(chr, "+ ", 2) == 0 || strncmp(chr, " +", 2) == 0)
+		return (3);
+	else if (strncmp(chr, " ", 1) == 0)
+		return (2);
+	else if (strncmp(chr, "+", 1) == 0)
+		return (2);
+	return (1);
+}
 int get_specifier(const char *chr, va_list *args, int len)
 {
+	int fg, val;
 	int i = 0;
-	int len_updated;
 	find_spec func[] = {
 		{"c", p_char}, {"s", p_str}, {"d", p_int}, {"i", p_int},
 		{"%", p_percent}, {"b", p_binary}, {"u", p_usigned_int},
 		{"o", p_octal}, {"x", p_hex}, {"X", p_hex}, {"S", p_str},
-		{"p", p_addr}, {"+d", p_int}, {"+i", p_int},
+		{"p", p_addr}, {"+d", p_int}, {" d", p_int}, {"+ d", p_int},
+		{" +d", p_int}, {"+i", p_int}, {" i", p_int}, {"+ i", p_int},
+		{" +i", p_int},
 		{NULL, NULL}
 	};
-
+	fg = get_flag(chr);
 	while (func[i].c != NULL)
 	{
-		if (strncmp(func[i].c, chr, *chr == 43 ? 2 : 1) == 0)
+		if (strncmp(func[i].c, chr, fg) == 0)
 		{
-			if (*chr == 'X' || *chr == 'S' || *chr == '+')
+			if (*chr == 'X' || *chr == 'S')
 				len += 2000;
-			len_updated = func[i].func(args, len);
+			if (fg > 1)
+				if (fg == 2 && *chr == 32)
+					val = 2000;
+				else
+					val = 3000;
+			len = func[i].func(args, fg > 1 ? len + val : len);
+			if (fg == 3)
+				chr += 2;
+			else if (fg == 2)
+				chr++;
 			break;
 		}
 		i++;
@@ -36,9 +57,9 @@ int get_specifier(const char *chr, va_list *args, int len)
 	{
 		PRINT(*(chr - 1));
 		PRINT(*chr);
-		len_updated = len + 2;
+		len += 2;
 	}
-	return (len_updated);
+	return (len);
 }
 
 /**
@@ -65,8 +86,7 @@ int _printf(const char *format, ...)
 			return (-1);
 		if (*c == '%' && *(c + 1) != '\0')
 		{
-			len = get_specifier(++c, &args, len - 1);
-			c += (*c == 43 ? 1 : 0);
+			len = get_specifier(++c, &args, --len);
 		}
 		else
 			PRINT(*c);
