@@ -27,19 +27,19 @@ int p_int_helper(long num, int len)
 int p_int(va_list *args, int len)
 {
 	long num = va_arg(*args, int);
-
 	if (len >= 2999 && num >= 0)
 	{
 		PRINT('+');
 		len++;
-		len -= 3000;
 	} else if (len >= 1999 && num >= 0)
 	{
 		PRINT(' ');
 		len++;
-		len -= 2000;
 	}
-
+	if (len >= 2999)
+		len -= 3000;
+	else if (len >= 1999)
+		len -= 2000;
 	if (num == 0)
 	{
 		PRINT('0');
