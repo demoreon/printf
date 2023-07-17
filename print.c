@@ -41,8 +41,8 @@ int get_specifier(const char *chr, va_list *args, int len)
 		{
 			if (*chr == 'X' || *chr == 'S')
 				len += 2000;
-			else if (*chr == '#' && *(chr + 1) == 'X')
-			        len += 2000;
+			if (*chr == '#' && *(chr + 1) == 'X')
+				len += 2000;
 			if (fg > 1)
 			{
 				if (fg == 2 && *chr == 32)
@@ -88,12 +88,18 @@ int _printf(const char *format, ...)
 	{
 		if (*c == '%' && *(c + 1) == '\0')
 			return (-1);
-		if (*c == '%' && *(c + 1) != '\0')
+		if (*c == '%' && *(c + 1) == 32 && *(c + 2) == '\0')
+			return (-1);
+		if (*c == '%' && *(c + 1) == 32 && *(c + 2) == '%')
+		{
+			PRINT('%');
+			c += 2;
+		} else if (*c == '%' && *(c + 1) != '\0')
 		{
 			len = get_specifier(++c, &args, --len);
 			if (get_flag(c) == 3)
 				c += 2;
-			else if (get_flag(c) == 2)
+			else if (get_flag(c) == 2 && *(c + 1) != '\0')
 				c++;
 		}
 		else

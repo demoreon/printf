@@ -36,7 +36,6 @@ int p_hex(va_list *args, int len)
 	int num;
 
 	num = va_arg(*args, int);
-
 	if (num == 0)
 	{
 		PRINT(48);
@@ -109,7 +108,6 @@ int p_octal(va_list *args, int len)
 		i--;
 	}
 	buf[c] = '\0';
-
 	if (c) /* Check buffer not empty */
 		buffer_pro(buf, c);
 	return (len);
