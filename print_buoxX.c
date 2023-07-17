@@ -36,12 +36,28 @@ int p_hex(va_list *args, int len)
 	int num;
 
 	num = va_arg(*args, int);
+
 	if (num == 0)
 	{
-		PRINT(num + 48);
-		return (len >= 1999 ? ++len - 2000 : ++len);
+		PRINT(48);
+		if (len >= 4499)
+			return (++len - 4500);
+		else if	(len >= 2499)
+			return (++len - 2500);
+		return (++len);
 	}
-
+	if (len >= 4499)
+	{
+		PRINT('0');
+		PRINT('X');
+		len -= 2498;
+	}
+	else if	(len >= 2499)
+	{
+		PRINT('0');
+		PRINT('x');
+		len -= 2498;
+	}
 	len = p_hex_helper(num, len);
 	return (len >= 1999 ? len - 2000 : len);
 }
@@ -66,7 +82,14 @@ int p_octal(va_list *args, int len)
 	if (num == 0)
 	{
 		PRINT(48);
+		if (len >= 2499)
+			return (++len - 2500);
 		return (++len);
+	}
+	if (len >= 2499)
+	{
+		PRINT('0');
+		len -= 2499;
 	}
 	while (num)
 	{
