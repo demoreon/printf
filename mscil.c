@@ -69,3 +69,29 @@ int p_percent(va_list *args, int len)
 	len++;
 	return (len);
 }
+
+/**
+ * p_lint - This handles the %ld and %li output
+ * @args: The integer to print
+ * @len: The current len
+ * Return: Updated len
+ */
+
+int p_lint(va_list *args, int len)
+{
+	long num = va_arg(*args, long int);
+
+	if (num == 0)
+	{
+		PRINT('0');
+		return (++len);
+	}
+	if (num < 0)
+	{
+		PRINT('-');
+		len++;
+		num = -num;
+	}
+	len = p_int_helper(num, len);
+	return (len);
+}
