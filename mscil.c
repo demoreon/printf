@@ -86,18 +86,17 @@ int p_lint(va_list *args, int len)
 		PRINT('0');
 		return (++len);
 	}
-	if (num == -1)
-	{
-		PRINT('-');
-		len ++;
-		num = 1;
-	}
-	else if (num < 0)
+	if (num == LONG_MIN)
 	{
 		PRINT('-');
 		PRINT('9');
 		len += 2;
 		num = 223372036854775808;
+	}else if (num < 0)
+	{
+		PRINT('-');
+		len++;
+		num = -num;
 	}
 	len = p_int_helper(num, len);
 	return (len);
