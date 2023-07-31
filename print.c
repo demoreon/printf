@@ -10,7 +10,9 @@ int get_flag(const char *chr)
 {
 	if (strncmp(chr, "+ ", 2) == 0 || strncmp(chr, " +", 2) == 0)
 		return (3);
-	else if (*chr == ' ' || *chr == '+' || *chr == '#' || *chr == 'l')
+	else if (*chr == ' ' || *chr == '+' || *chr == '#')
+		return (2);
+	else if (*chr == 'l' || *chr == 'h')
 		return (2);
 	return (1);
 }
@@ -34,7 +36,8 @@ int get_specifier(const char *chr, va_list *args, int len)
 		{" +i", p_int}, {"#o", p_octal}, {"#d", p_int}, {"#i", p_int},
 		{"#x", p_hex}, {"#X", p_hex}, {"s", p_str}, {"ld", p_lint},
 		{"li", p_lint}, {"lo", p_int}, {"lu", p_int}, {"lx", p_int},
-		{"lX", p_int}, {NULL, NULL}
+		{"lX", p_int}, {"hd", p_hint}, {"hi", p_hint}, {"ho", p_int},
+		{"hu", p_int}, {"hx", p_int}, {"hX", p_int}, {NULL, NULL}
 	};
 	fg = get_flag(chr);
 	while (func[i].c != NULL)
@@ -51,7 +54,7 @@ int get_specifier(const char *chr, va_list *args, int len)
 					val = 2000;
 				else if (fg == 2 && *chr == 35)
 					val = 2500;
-				else if (fg == 2 && *chr == 'l')
+				else if (fg == 2 && (*chr == 'l' || *chr =='h'))
 					val = 0;
 				else
 					val = 3000;

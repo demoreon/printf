@@ -101,3 +101,29 @@ int p_lint(va_list *args, int len)
 	len = p_int_helper(num, len);
 	return (len);
 }
+
+/**
+ * p_hint - This handles the %ld and %li output
+ * @args: The integer to print
+ * @len: The current len
+ * Return: Updated len
+ */
+
+int p_hint(va_list *args, int len)
+{
+	int num = va_arg(*args, short int);
+
+	if (num == 0)
+	{
+		PRINT('0');
+		return (++len);
+	}
+	else if (num < 0)
+	{
+		PRINT('-');
+		len++;
+		num = -num;
+	}
+	len = p_int_helper(num, len);
+	return (len);
+}
