@@ -111,7 +111,7 @@ int p_lint(va_list *args, int len)
 
 int p_hint(va_list *args, int len)
 {
-	int num = va_arg(*args, short int);
+	int num = va_arg(*args, int);
 
 	if (num == 0)
 	{
