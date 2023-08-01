@@ -28,7 +28,10 @@ int p_int(va_list *args, int len)
 {
 	long num;
 	if (len >= 4999)
+	{
 		num = va_arg(*args, long);
+		len -= 5000;
+	}
 	else
 		num = va_arg(*args, int);
 
@@ -42,9 +45,8 @@ int p_int(va_list *args, int len)
 		PRINT(' ');
 		len++;
 	}
-	if (len >= 4999)
-		len -= 5000;
-	else if (len >= 2999)
+
+	if (len >= 2999)
 		len -= 3000;
 	else if (len >= 2499)
 		len -= 2500;
