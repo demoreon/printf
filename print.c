@@ -34,10 +34,11 @@ int get_specifier(const char *chr, va_list *args, int len)
 		{"p", p_addr}, {"+d", p_int}, {" d", p_int}, {"+ d", p_int},
 		{" +d", p_int}, {"+i", p_int}, {" i", p_int}, {"+ i", p_int},
 		{" +i", p_int}, {"#o", p_octal}, {"#d", p_int}, {"#i", p_int},
-		{"#x", p_hex}, {"#X", p_hex}, {"s", p_str}, {"ld", p_lint},
-		{"li", p_lint}, {"lo", p_int}, {"lu", p_int}, {"lx", p_int},
-		{"lX", p_int}, {"hd", p_hint}, {"hi", p_hint}, {"ho", p_int},
-		{"hu", p_int}, {"hx", p_int}, {"hX", p_int}, {NULL, NULL}
+		{"#x", p_hex}, {"#X", p_hex}, {"s", p_str}, {"ld", p_int},
+		{"li", p_int}, {"lo", p_octal}, {"lu", p_usigned_int},
+		{"lx", p_hex}, {"lX", p_hex}, {"hd", p_int}, {"hi", p_int},
+		{"ho", p_octal}, {"hu", p_usigned_int}, {"hx", p_hex},
+		{"hX", p_hex}, {NULL, NULL}
 	};
 	fg = get_flag(chr);
 	while (func[i].c != NULL)
@@ -54,8 +55,10 @@ int get_specifier(const char *chr, va_list *args, int len)
 					val = 2000;
 				else if (fg == 2 && *chr == 35)
 					val = 2500;
-				else if (fg == 2 && (*chr == 'l' || *chr =='h'))
-					val = 0;
+				else if (fg == 2 && *chr == 'l')
+					val = 5000;
+				else if (fg == 2 && *chr =='h')
+					val = 0   ;
 				else
 					val = 3000;
 			}

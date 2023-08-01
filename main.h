@@ -30,8 +30,6 @@ int _printf(const char *, ...);
 int p_char(va_list *, int);
 int p_str(va_list *, int);
 int p_int(va_list *, int);
-int p_lint(va_list *, int);
-int p_hint(va_list *, int);
 int p_percent(va_list *, int);
 int p_binary(va_list *, int);
 int p_usigned_int(va_list *, int);

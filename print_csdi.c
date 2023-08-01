@@ -26,7 +26,11 @@ int p_int_helper(long num, int len)
 
 int p_int(va_list *args, int len)
 {
-	long num = va_arg(*args, int);
+	long num;
+	if (len >= 4999)
+		num = va_arg(*args, long);
+	else
+		num = va_arg(*args, int);
 
 	if (len >= 2999 && num >= 0)
 	{
@@ -38,7 +42,9 @@ int p_int(va_list *args, int len)
 		PRINT(' ');
 		len++;
 	}
-	if (len >= 2999)
+	if (len >= 4999)
+		len -= 5000;
+	else if (len >= 2999)
 		len -= 3000;
 	else if (len >= 2499)
 		len -= 2500;
@@ -53,7 +59,14 @@ int p_int(va_list *args, int len)
 	{
 		PRINT('-');
 		len++;
-		num = -num;
+		if (num == LONG_MIN)
+		{
+			PRINT('9');
+			len++;
+			num = 223372036854775808;
+		}
+		else
+			num = -num;
 	}
 	len = p_int_helper(num, len);
 	return (len);
