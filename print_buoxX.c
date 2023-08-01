@@ -134,11 +134,18 @@ int p_octal(va_list *args, int len)
 
 int p_usigned_int(va_list *args, int len)
 {
-	unsigned int num = va_arg(*args, unsigned int);
+	long num;
 	unsigned int div = 1;
 	char buf[BUF_MAX];
 	int c = 0; /* buffer index tracker */
 
+	if (len >= 4999)
+	{
+		num = va_arg(*args, long);
+		len -= 5000;
+	}
+	else
+		num = va_arg(*args, unsigned int);
 	if (num == 0)
 	{
 		PRINT(48);
