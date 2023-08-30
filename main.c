@@ -12,7 +12,6 @@ int main(void)
 {
 	int len, len2;
 
-	printf("%lu", ULONG_MAX);
 	len = _printf("%lu", ULONG_MAX);
 	len2 = printf("%lu", ULONG_MAX);
 	fflush(stdout);

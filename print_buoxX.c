@@ -135,7 +135,7 @@ int p_octal(va_list *args, int len)
 int p_usigned_int(va_list *args, int len)
 {
 	unsigned long num;
-	unsigned int div = 1;
+	unsigned long div = 1;
 	char buf[BUF_MAX];
 	int c = 0; /* buffer index tracker */
 
