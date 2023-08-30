@@ -76,10 +76,10 @@ int p_hex(va_list *args, int len)
 
 int p_octal(va_list *args, int len)
 {
-	long num;
+	unsigned long num;
 	unsigned int oct;
 	int i = 0;
-	int a[12];
+	int a[25];
 	char buf[BUF_MAX];
 	int c = 0; /* buffer index tracker */
 
