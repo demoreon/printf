@@ -85,7 +85,7 @@ int p_octal(va_list *args, int len)
 
 	if (len >= 4999)
 	{
-		num = va_arg(*args, long);
+		num = va_arg(*args, unsigned long);
 		len -= 5000;
 	}
 	else
