@@ -33,7 +33,6 @@ int p_hex_helper(unsigned int num, int len)
 int p_hex(va_list *args, int len)
 {
 	unsigned int num;
-
 	num = va_arg(*args, int);
 	if (num == 0)
 	{
@@ -42,6 +41,8 @@ int p_hex(va_list *args, int len)
 			return (++len - 4500);
 		else if	(len >= 2499)
 			return (++len - 2500);
+		else if (len >= 1999)
+			return(++len - 2000);
 		return (++len);
 	}
 	if (len >= 4499)
