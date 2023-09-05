@@ -59,23 +59,7 @@ int p_hex(va_list *args, int len)
 		PRINT('x');
 		len -= 2498;
 	}
-
-	if (num < 0) {
-		len++;
-		neg = num;
-		for (shift = 28; shift > - 0; shift -= 4)
-		{
-			if (len >= 1999)
-				chr = 'A';
-			else
-				chr = 'a';
-			hex = (neg >> shift) & 0xf;
-			digit = hex < 10 ? hex + '0' : chr + hex - 10;
-			PRINT(digit);
-			len++;
-		}
-	} else
-		len = p_hex_helper(num, len);
+	len = p_hex_helper(num, len);
 	return (len >= 1999 ? len - 2000 : len);
 }
 
