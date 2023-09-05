@@ -15,7 +15,7 @@ int main(void)
 
 	res *= 2;
 	len = _printf("%x + %x = %x\n", INT_MAX, INT_MAX, res);
-	len2 = printf("%x + %x = %x\n", INT_MAX, INT_MAX, res);
+	len2 = printf("%x + %x = %lx\n", INT_MAX, INT_MAX, res);
 	fflush(stdout);
 	if (len != len2)
 	{
