@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "main.h"
 
 /**
@@ -10,13 +11,15 @@
 int main(void)
 {
 	int len, len2;
+	long res = INT_MAX;
 
-	len = _printf("%x", -1024);
-	len2 = printf("%x", -1024);
+	res *= 2;
+	len = _printf("%x + %x = %x\n", INT_MAX, INT_MAX, res);
+	len2 = printf("%x + %x = %x\n", INT_MAX, INT_MAX, res);
 	fflush(stdout);
 	if (len != len2)
 	{
-		printf("\n %d @ %d - Lengths differ.\n", len, len2);
+		printf("Lengths differ.\n");
 		fflush(stdout);
 		return (1);
 	}
