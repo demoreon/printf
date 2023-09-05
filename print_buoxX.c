@@ -17,8 +17,7 @@ int p_hex_helper(long num, int len)
 		chr = A;
 	else
 		chr = a;
-
-	if (num >= 16)
+	if (num > 16)
 		len = p_hex_helper(num / 16, len);
 	PRINT(chr[num % 16]);
 	return (++len);
@@ -33,14 +32,12 @@ int p_hex_helper(long num, int len)
 
 int p_hex(va_list *args, int len)
 {
-	long num;
-	if (len >= 4999)
-	{
-		num = va_arg(*args, long);
-		len -= 5000;
-	}
-	else
-		num = va_arg(*args, int);
+        long num;
+	unsigned long neg;
+	char chr, digit;
+	int shift, hex;
+
+	num = va_arg(*args, int);
 	if (num == 0)
 	{
 		PRINT(48);
@@ -62,7 +59,23 @@ int p_hex(va_list *args, int len)
 		PRINT('x');
 		len -= 2498;
 	}
-	len = p_hex_helper(num, len);
+
+	if (num < 0) {
+		len++;
+		neg = num;
+		for (shift = 28; shift > - 0; shift -= 4)
+		{
+			if (len >= 1999)
+				chr = 'A';
+			else
+				chr = 'a';
+			hex = (neg >> shift) & 0xf;
+			digit = hex < 10 ? hex + '0' : chr + hex - 10;
+			PRINT(digit);
+			len++;
+		}
+	} else
+		len = p_hex_helper(num, len);
 	return (len >= 1999 ? len - 2000 : len);
 }
 
