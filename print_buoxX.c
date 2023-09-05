@@ -33,9 +33,6 @@ int p_hex_helper(unsigned int num, int len)
 int p_hex(va_list *args, int len)
 {
 	unsigned int num;
-	unsigned long neg;
-	char chr, digit;
-	int shift, hex;
 
 	num = va_arg(*args, int);
 	if (num == 0)
@@ -59,6 +56,7 @@ int p_hex(va_list *args, int len)
 		PRINT('x');
 		len -= 2498;
 	}
+
 	len = p_hex_helper(num, len);
 	return (len >= 1999 ? len - 2000 : len);
 }
