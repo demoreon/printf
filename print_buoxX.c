@@ -7,7 +7,7 @@
  * Return: len of the printed char.
  */
 
-int p_hex_helper(long num, int len)
+int p_hex_helper(unsigned int num, int len)
 {
 	char a[] = "0123456789abcdef";
 	char A[] = "0123456789ABCDEF";
@@ -32,7 +32,7 @@ int p_hex_helper(long num, int len)
 
 int p_hex(va_list *args, int len)
 {
-	long num;
+	unsigned int num;
 	unsigned long neg;
 	char chr, digit;
 	int shift, hex;

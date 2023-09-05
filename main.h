@@ -35,7 +35,7 @@ int p_binary(va_list *, int);
 int p_usigned_int(va_list *, int);
 int p_octal(va_list *, int len);
 int p_hex(va_list *, int len);
-int p_hex_helper(long int, int);
+int p_hex_helper(unsigned int, int);
 int p_int_helper(long int, int);
 int p_addr(va_list *, int len);
 int get_flag(const char *chr);
