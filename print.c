@@ -26,7 +26,7 @@ int get_flag(const char *chr)
  */
 int get_specifier(const char *chr, va_list *args, int len)
 {
-	int fg, val, i = 0;
+	int fg, i = 0;
 	find_spec func[] = {
 		{"c", p_char}, {"s", p_str}, {"d", p_int}, {"i", p_int},
 		{"%", p_percent}, {"b", p_binary}, {"u", p_usigned_int},
@@ -49,7 +49,7 @@ int get_specifier(const char *chr, va_list *args, int len)
 				len += 2000;
 			if (*chr == '#' && *(chr + 1) == 'X')
 				len += 2000;
-			len = func[i].func(args, fg > 1 ? len + val : len);
+			len = func[i].func(args, len);
 			break;
 		} i++;
 	}
