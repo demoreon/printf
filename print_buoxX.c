@@ -72,7 +72,7 @@ int p_hex(va_list *args, int len)
 
 int p_octal(va_list *args, int len)
 {
-	long num;
+	int num;
 	int oct;
 	int i = 0;
 	int a[12];
