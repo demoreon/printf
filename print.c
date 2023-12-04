@@ -49,19 +49,6 @@ int get_specifier(const char *chr, va_list *args, int len)
 				len += 2000;
 			if (*chr == '#' && *(chr + 1) == 'X')
 				len += 2000;
-			if (fg > 1)
-			{
-				if (fg == 2 && *chr == 32)
-					val = 2000;
-				else if (fg == 2 && *chr == 35)
-					val = 2500;
-				else if (fg == 2 && *chr == 'l')
-					val = 5000;
-				else if (fg == 2 && *chr =='h')
-					val = 0   ;
-				else
-					val = 3000;
-			}
 			len = func[i].func(args, fg > 1 ? len + val : len);
 			break;
 		} i++;
